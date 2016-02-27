@@ -8,48 +8,53 @@
 	<script src="bower_components/angular/angular.js"></script>
 	<script type="text/javascript" src="js/app.js"></script>
 </head>
-<body>
+<body ng-app="workbook" ng-controller="variables">
 	<div class="contents">
 	    <div class="col-md-3 left-div">
 	        <h3>Formula</h3>
 	        <div class="glyphicon glyphicon-chevron-up"></div>
-	        <div class="formula"><span>x+y+z+a</span></div>
-	        <div class="formula"><span>x+y+z+a</span></div>
-	        <div class="formula"><span>x+y+z+a</span></div>
-	        <div class="formula"><span>x+y+z+a</span></div>
-	        <div class="formula"><span>x+y+z+a</span></div>
-	        <div class="formula"><span>x+y+z+a</span></div>
+	        <div class="formula" ng-repeat="formula in formulas" ng-click="add_formula(formula)"><span>{{formula.string}}</span></div>
 	        <div class="glyphicon glyphicon-chevron-down"></div>
 	    </div>
 	    <div class="col-md-9 right-div">
 	       <div class="question">
 	           <div>
 	               <span class="qna">Question</span>
-	               <div class="qus_details">Calculate the force needed to speed up a car with a rate of 5ms-2, if the mass of the car is 1000 kg.</div>
+	               <div class="qus_details">{{question}}</div>
 	           </div>
 	       </div>
 	       <div class="work-area">
 	           <span> Work Area </span>
            <div class="contents workArea">
 	               <div class="col-md-6 wa">
-                   <div class="step">
-	                       <div class="col-xs-12 stepTitle">Step 1</div>
-	                       <div class="col-xs-12 stepareabox">asdfasdfasd</div>
+                   <div class="step" ng-repeat="formula in solution track by $index">
+	                       <div class="col-xs-12 stepTitle">Step {{$index+1}} var{{formula.variable}}</div>
+	                       <div class="col-xs-12 stepareabox">
+								{{formula.string}}<br/>
+								<ul>
+								<li ng-repeat="(k,v) in formula.map">
+									{{k}} = <select ng-model="new_key" ng-change="evaluate($parent.$index, k, new_key)" ng-options="key as key for (key, value) in vars">
+								</select>
+								</li>
+								: {{formula.result}}
+	                       </div>
 	                   </div>
-	                   <div class="step">
-                           <div class="col-xs-12 stepTitle">Step 1</div>
-                           <div class="col-xs-12 stepareabox">asdfasdfasd</div>
-                       </div>
 	               </div>
 	               <div class="col-md-6 wa variables">
 	                   <h3>Variables</h3>
-	                   <div class="col-md-8"> <input name="variable" placeholder="Variable Name" class="form-control"></div>
-	                   <div class="col-md-4"> <button type="button" class="btn btn-primary variable_button">Add</button></div>
+	                   <div class="col-md-8"> <input name="variable" placeholder="Variable Name" class="form-control" ng-model="new_value"></div>
+	                   <div class="col-md-4"> <button type="button" class="btn btn-primary variable_button" ng-click="add()">Add</button></div>
+	                   <div ng-repeat="(key, value) in vars">
+	                   	<b>var{{key}}</b> = {{value}}<br />
+	                   </div>
 	               </div>
 	           </div>
 	       </div>
 	       <div class="answer">
                <span>Answer</span>
+               <select ng-change="submit()" ng-model="answer" 
+				ng-options="'var'+k for (k,v) in vars">
+				</select>
            </div>
 	    </div>
 	</div>

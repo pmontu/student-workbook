@@ -4,8 +4,8 @@ app.controller("variables", function ($scope){
 	$scope.correct = 5000
 	$scope.vars = {};
 	$scope.counter = 1
-	$scope.add = function(val){
-		$scope.vars[$scope.counter] = val ? val : $scope.new_value
+	$scope.add = function(isFormulaVariable){
+		$scope.vars[$scope.counter] = isFormulaVariable == true ? 0 : $scope.new_value
 		return $scope.counter++;
 	}
 	$scope.submit = function(){
@@ -15,6 +15,8 @@ app.controller("variables", function ($scope){
 			alert("Try Again")
 		}
 	}
+
+	$scope.question = "Calculate the force needed to speed up a car with a rate of 5ms-2(x), if the mass of the car is 1000000 g(y)."
 
 	$scope.formulas = [
 		{
@@ -31,10 +33,11 @@ app.controller("variables", function ($scope){
 			variable:-1
 		}]
 	$scope.solution = []
-	$scope.add_formula = function(){
-		recalculate($scope.selected_formula)
-		obj = jQuery.extend(true, {}, $scope.selected_formula)
-		obj.variable = $scope.add()
+	$scope.add_formula = function(formula){
+		formula = formula ? formula : $scope.selected_formula
+		// recalculate($scope.selected_formula)
+		obj = jQuery.extend(true, {}, formula)
+		obj.variable = $scope.add(true)
 		$scope.solution.push(obj)
 	}
 	$scope.evaluate = function(index, map_key, new_key){
