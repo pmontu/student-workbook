@@ -9,6 +9,7 @@ app.controller("solveController", function ($scope, $routeParams, data){
 	$scope.correct = question.answer
 	$scope.vars = {};
 	$scope.counter = 1
+	$scope.last_derived_answer = 'empty'
 
 	populate_input_variables()
 
@@ -54,6 +55,7 @@ app.controller("solveController", function ($scope, $routeParams, data){
 		obj.variable = $scope.add()
 		$scope.solution.push(obj)
 		recalculate($scope.solution[$scope.solution.length-1])
+		$scope.last_derived_answer = 'new'
 	}
 	$scope.evaluate = function(index, map_key, new_key){
 		$scope.solution[index].map[map_key] = new_key
@@ -67,6 +69,9 @@ app.controller("solveController", function ($scope, $routeParams, data){
 		formula.result = eval(equation)
 		if (formula.variable != -1){
 			$scope.vars[formula.variable] = formula.result
+			if(formula.result){
+				$scope.last_derived_answer = formula.result
+			}
 		}
 	}
 })

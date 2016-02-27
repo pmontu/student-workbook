@@ -30,10 +30,19 @@
                        </div>
                    </div>
 
-                   <div class="step" ng-show="solution.length==0">
-                   No steps yet. Start by adding a formula from your left <br /><br />
-                   <b><i>Tip:</i></b> Remember to store the input in handy variables
-                   </div>
+				    <div class="step" ng-if="last_derived_answer == 'new'">
+				        <h3>Choose the variables</h3>
+				    </div>
+				    <div class="step" ng-if="last_derived_answer == correct">
+				        <h1>Good Job</h1>
+				    </div>
+				    <div class="step" ng-if="last_derived_answer == 'empty'">
+	                   No steps yet. Start by adding a formula from your left <br /><br />
+	                   <b><i>Tip:</i></b> Remember to store the input in handy variables
+				    </div>
+				    <div class="step" ng-if="last_derived_answer!= correct && last_derived_answer!= 'empty' && last_derived_answer!= 'new'">
+				        <h2>Wrong Answer. Add a new formula or try again</h2>
+				    </div>
                </div>
                <div class="col-md-6 wa variables">
                    <h3>Variables</h3>
@@ -44,11 +53,11 @@
                </div>
            </div>
        </div>
-       <div class="answer">
+       <!-- <div class="answer">
            <span>Answer</span>
            <select ng-change="submit()" ng-model="answer" 
 			ng-options="k for (k,v) in vars">
 			</select>
-       </div>
+       </div> -->
     </div>
 </div>
