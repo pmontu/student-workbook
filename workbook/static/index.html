@@ -1,65 +1,62 @@
 <html>
-
 <head>
+
+	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/main.css">
 	<script src="bower_components/jquery/dist/jquery.js"></script>
+	<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script src="bower_components/angular/angular.js"></script>
-	<script src="js/app.js"></script>
+	<script type="text/javascript" src="js/app.js"></script>
 </head>
-
 <body ng-app="workbook" ng-controller="variables">
-<div style="width:300px">
-	<b><i>Question:</i></b>
-	<br />{{question}}<hr/>
-	<br />
-
-	<div style="border-style: inset;">
-		Variables:
-		<div ng-repeat="(key, value) in vars">
-			<b>var{{key}}</b> = {{value}}</div><br />
-		var{{counter}} : <input type=text ng-model="new_value" placeholder="value"/><button ng-click="add()">add</button>
+	<div class="contents">
+	    <div class="col-md-3 left-div">
+	        <h3>Formula</h3>
+	        <div class="glyphicon glyphicon-chevron-up"></div>
+	        <div class="formula" ng-repeat="formula in formulas" ng-click="add_formula(formula)"><span>{{formula.string}}</span></div>
+	        <div class="glyphicon glyphicon-chevron-down"></div>
+	    </div>
+	    <div class="col-md-9 right-div">
+	       <div class="question">
+	           <div>
+	               <span class="qna">Question</span>
+	               <div class="qus_details">{{question}}</div>
+	           </div>
+	       </div>
+	       <div class="work-area">
+	           <span> Work Area </span>
+           <div class="contents workArea">
+	               <div class="col-md-6 wa">
+                   <div class="step" ng-repeat="formula in solution track by $index">
+	                       <div class="col-xs-12 stepTitle">Step {{$index+1}} var{{formula.variable}}</div>
+	                       <div class="col-xs-12 stepareabox">
+								{{formula.string}}<br/>
+								<ul>
+								<li ng-repeat="(k,v) in formula.map">
+									{{k}} = <select ng-model="new_key" ng-change="evaluate($parent.$index, k, new_key)" ng-options="key as key for (key, value) in vars">
+								</select>
+								</li>
+								: {{formula.result}}
+	                       </div>
+	                   </div>
+	               </div>
+	               <div class="col-md-6 wa variables">
+	                   <h3>Variables</h3>
+	                   <div class="col-md-8"> <input name="variable" placeholder="Variable Name" class="form-control" ng-model="new_value"></div>
+	                   <div class="col-md-4"> <button type="button" class="btn btn-primary variable_button" ng-click="add()">Add</button></div>
+	                   <div ng-repeat="(key, value) in vars">
+	                   	<b>var{{key}}</b> = {{value}}<br />
+	                   </div>
+	               </div>
+	           </div>
+	       </div>
+	       <div class="answer">
+               <span>Answer</span>
+               <select ng-change="submit()" ng-model="answer" 
+				ng-options="'var'+k for (k,v) in vars">
+				</select>
+           </div>
+	    </div>
 	</div>
-	<br /><br />
-
-	<div style="border-style: groove;">
-		Formula:<br />
-		<ol>
-			<li ng-repeat="formula in formulas">{{formula.string}}</li>
-		</ol>
-	</div>
-	<br/>
-
-	<div style="border-style: outset;">
-		Solution Space:<br />
-		<select ng-model="selected_formula" 
-		ng-options="formula as formula.string for formula in formulas">
-		</select><button ng-click="add_formula()">Add Formula</button>
-		<br /><br />
-		<ol>
-			<li ng-repeat="formula in solution track by $index">
-				{{formula.string}}<br/>
-				<ul>
-				<li ng-repeat="(k,v) in formula.map">
-					{{k}} = <select ng-model="new_key" ng-change="evaluate($parent.$index, k, new_key)" ng-options="key as key for (key, value) in vars">
-		</select>
-				</li>
-				: {{formula.result}}
-			</li>
-		</ol>
-	</div>
-	<br />
-
-	<hr/>
-	<b><i>Answer:</i></b>
-	<select ng-change="submit()" ng-model="answer" 
-	ng-options="'var'+k for (k,v) in vars">
-	</select>
-</div>
-<br /><br /><br />
-
-<!-- <div>
-	new key: {{ new_key | json }}<br/>
-	{{selected_formula | json}}
-</div> -->
-
 </body>
 </html>
