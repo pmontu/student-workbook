@@ -3,8 +3,10 @@ var app = angular.module("workbook", ["ngRoute"])
 app.controller("solveController", function ($scope, $routeParams, data){
 
 	question_id = $routeParams.question_id
-	$scope.question = data.questions[question_id].text
-	$scope.correct = data.questions[question_id].answer
+    question = data.Question.get(question_id)
+
+	$scope.question = question.text
+	$scope.correct = question.answer
 	$scope.vars = {};
 	$scope.counter = 1
 	$scope.add = function(isFormulaVariable){
@@ -58,7 +60,7 @@ app.controller("solveController", function ($scope, $routeParams, data){
 })
 
 app.controller("homeController", function ($scope, data){
-	$scope.questions = data.questions
+	$scope.questions = data.Question.list()
 })
 
 app.config(['$routeProvider', function($routeProvider) {
@@ -80,14 +82,23 @@ app.config(['$routeProvider', function($routeProvider) {
 
 app.factory('data', function(){
 	
+	questions = [{
+		text: "Calculate the force needed to speed up a car with a rate of 5ms-2, if the mass of the car is 1000000 g.",
+		answer: 5000
+	}, {
+		text: "Calculate the force needed to speed up a car with a rate of 10ms-2, if the mass of the car is 1000000 g.",
+		answer: 10000
+	}]
+
 	return {
-		questions : [{
-			text: "Calculate the force needed to speed up a car with a rate of 5ms-2(x), if the mass of the car is 1000000 g(y).",
-			answer: 5000
-		}, {
-			text: "Calculate the force needed to speed up a car with a rate of 10ms-2(x), if the mass of the car is 1000000 g(y).",
-			answer: 10000
-		}]
+		Question: {
+			get : function(id){
+				return questions[id]
+			},
+			list : function(){
+				return questions
+			}
+		}
 	};
 
 });
