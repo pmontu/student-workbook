@@ -179,3 +179,9 @@ background-color: rgb(244, 247, 250);
 	padding:0px;
 	float: left;
 }
+
+.col-md-6.wa{
+    height: 450px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
