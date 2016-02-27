@@ -40,13 +40,29 @@ app.controller("solveController", function ($scope, $routeParams, data){
 			expression: "k=_g_/1000",
 			map:{"_g_":-1},
 			result:0,
-			variable:-1
+			variable:-1,
+			unit:"kilo grams"
 		}, {
 			string: "f = m*a",
 			expression: "f = _m_*_a_",
 			map:{"_m_":-1, "_a_":-1},
 			result:0,
-			variable:-1
+			variable:-1,
+			unit:"Newton"
+		}, {
+			string: "s = v*t",
+			expression: "s = _v_*_t_",
+			map:{"_v_":-1, "_t_":-1},
+			result:0,
+			variable:-1,
+			unit:"meter"
+		}, {
+			string: "s = u*t+0.5*a*t*t",
+			expression: "s = _u_*_t_+0.5*_a_*_t_*_t_",
+			map:{"_u_":-1, "_a_":-1, "_t_":-1},
+			result:0,
+			variable:-1,
+			unit:"meter"
 		}]
 	$scope.solution = []
 	$scope.add_formula = function(formula){
@@ -64,20 +80,23 @@ app.controller("solveController", function ($scope, $routeParams, data){
 	function recalculate(formula){
 		equation = formula.expression
 		for(symbol in formula.map){
-			equation = equation.replace(symbol, "$scope.vars['"+formula.map[symbol]+"']")
+			// equation = equation.replace(symbol, "$scope.vars['"+formula.map[symbol]+"']")
+			equation = equation.replace(new RegExp(symbol, 'g'), "$scope.vars['"+formula.map[symbol]+"']");
 		}
 		formula.result = eval(equation)
 		if (formula.variable != -1){
-			$scope.vars[formula.variable] = formula.result
-			if(formula.result){
-				$scope.last_derived_answer = formula.result
+			result = parseFloat(formula.result).toFixed(2)
+			$scope.vars[formula.variable] = result
+			if(result){
+				$scope.last_derived_answer = result
 			}
+
 		}
 	}
 	$scope.non_null_vars = function(){
 		res = {}
 		for(key in $scope.vars){
-			if($scope.vars[key])
+			if(!isNaN($scope.vars[key]))
 				res[key] = $scope.vars[key]
 		}
 		return res
@@ -113,11 +132,18 @@ app.factory('data', function(){
 		inputs: [{name: "acceleration of car", value: 5,unit: "ms-2"},
 			{name: "mass of car", value: 1000000, unit: "gms"}]
 	}, {
-		text: "Calculate the force needed to speed up a car with a rate of 10ms-2, if the mass of the car is 1000000 g.",
-		answer: 10000,
-		inputs: [{name: "acceleration of car", value: 10,unit: "ms-2"},
-			{name: "mass of car", value: 1000000, unit: "gms"}]
+		text: "If it takes a player 3 seconds to run from the batter's box to the first base at an average speed of 6.5 m/s, what is the distance she covers in that time",
+		answer: 19.5,
+		inputs: [{name: "average velocity", value: 6.5,unit: "m/s"},
+			{name: "traveled time", value: 3, unit: "seconds"}]
+	}, {
+		text: "An airplane accelerates down a runway at 3.20 m/s2 for 32.8 s until is finally lifts off the ground. Determine the distance traveled before takeoff",
+		answer: 1721.34,
+		inputs: [{name: "acceleration", value: 3.20,unit: "m/s2"},
+			{name: "time on ground", value: 32.8, unit: "seconds"},
+			{name: "initial velocity", value: 0, unit: "m/s"}]
 	}]
+
 
 	return {
 		Question: {

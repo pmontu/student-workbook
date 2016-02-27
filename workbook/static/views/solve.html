@@ -19,7 +19,7 @@
        <div class="contents workArea">
                <div class="col-md-6 wa">
                <div class="step" ng-repeat="formula in solution track by $index">
-                       <div class="col-xs-12 stepTitle">Step {{$index+1}}. Output stored in <b>{{formula.variable}}</b> <span ng-show="formula.result"> = {{formula.result}}</span> </div>
+                       <div class="col-xs-12 stepTitle">Step {{$index+1}}. Output stored in <b>{{formula.variable}}</b> <i ng-show="formula.result"> = {{formula.result}} {{formula.unit}}</i> </div>
                        <div class="col-xs-12 stepareabox">
 							<h3>{{formula.string}}</h3>
 							Where
@@ -51,7 +51,7 @@
 		        <h3>Choose the variables</h3>
 		    </div>
 		    <div class="step" ng-if="last_derived_answer == correct">
-		        <h1>Good Job</h1>
+		        <h1 style="color:darkgreen">Good Job</h1>
 		    </div>
 		    <div class="step" ng-if="last_derived_answer == 'empty'">
                No steps yet. Start by adding a formula from your left <br /><br />
