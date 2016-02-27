@@ -51,4 +51,8 @@ app.controller("variables", function ($scope){
 			$scope.vars[formula.variable] = formula.result
 		}
 	}
+<<<<<<< Updated upstream
 })
+=======
+})
+>>>>>>> Stashed changes

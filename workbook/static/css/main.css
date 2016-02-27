@@ -1,0 +1,181 @@
+@CHARSET "UTF-8";
+ .col-md-3.left-div{
+ border-width: 1px;
+ border-color: rgb(160, 160, 160);
+ border-style: solid;
+ background-color: rgb(244, 247, 250);
+ position: absolute;
+ left: 60px;
+ top: 35px;
+ width: 298px;
+ height: 790px;
+ z-index: 34;
+}
+
+ .col-md-9.right-div {
+ border-width: 1px;
+ border-color: rgb(215, 215, 215);
+ border-style: solid;
+ background-color: rgb(244, 247, 250);
+ position: absolute;
+ left: 360px;
+ top: 36px;
+ width: 868px;
+ height: 790px;
+ z-index: 33;
+}
+.col-md-3.left-div h3{
+ font-size: 22.324px;
+ font-family: "Lato";
+ color: rgb(85, 92, 100);
+ line-height: 1.2;
+ -moz-transform: matrix( 1.25425342017503,0,0,1.25425342017503,0,0);
+ -webkit-transform: matrix( 1.25425342017503,0,0,1.25425342017503,0,0);
+ -ms-transform: matrix( 1.25425342017503,0,0,1.25425342017503,0,0);
+ position: absolute;
+ left: 99.138px;
+ z-index: 42;
+ }
+ 
+ span.qna {
+    color: rgb(85, 92, 100);
+    font-family: "Lato";
+    font-size: 29.324px;
+    left: 99.138px;
+    line-height: 1.2;
+    position: static;
+    transform: matrix(1.25425, 0, 0, 1.25425, 0, 0);
+}
+ 
+ .formula {
+    background-color: rgb(248, 248, 248);
+    border-color: rgb(225, 227, 229);
+    border-radius: 6px;
+    border-style: solid;
+    border-width: 1px;
+    height: 71px;
+    left: 19px;
+    margin-bottom: 7px;
+    position: relative;
+    top: 104px;
+    width: 234px;
+    z-index: 67;
+}
+
+.glyphicon {
+    color: #e4e8ec;
+    display: inline-block;
+    font-family: "Glyphicons Halflings";
+    font-size: 40px;
+    font-style: initial;
+    font-weight: 900;
+    left: 118px;
+    line-height: 1;
+    position: relative;
+    top: 100px;
+}
+.question {
+    background-color: rgb(236, 238, 239);
+    height: 140px;
+    left: 0;
+    position: relative;
+    top: 11px;
+    width: 838px;
+}
+.work-area {
+    background-color: rgb(244, 247, 250);
+    height: 500px;
+    left: 0;
+    position: relative;
+    top: 19px;
+    width: 100%;
+}
+.answer{
+	background-color: rgb(236, 238, 239);
+    height: 140px;
+    left: 0;
+    position: relative;
+    top: 11px;
+    width: 838px;
+}
+
+.question > div {
+    left: 14px;
+    position: relative;
+}
+.qus_details{
+    font-family: small-caption;
+    font-style: inherit;
+    position: relative;
+    top: 10px;
+}
+
+.work-area span {
+    color: rebeccapurple;
+    font-size: 20px;
+    left: 20px;
+    position: relative;
+}
+.formula > span {
+    left: 65px;
+    position: relative;
+    top: 24px;
+}
+
+.variable_button {
+    width: 100%;
+}
+
+.step > div.stepareabox {
+    background-color: rgb(255, 255, 255);
+    border-color: rgb(228, 232, 236);
+    border-style: solid;
+    border-width: 1px;
+    height: 134px;
+    left: 0;
+    padding: 8px;
+    position: relative;
+    margin-bottom: 20px;
+    width: 411px;
+}
+
+.step > span {
+    color: black;
+    left: 2px;
+    position: relative;
+    top: 16px;
+}
+
+.col-md-6.wa.variables{
+background-color: rgb(244, 247, 250);
+    border-color: rgb(172, 172, 172);
+    border-radius: 2px;
+    border-style: solid;
+    border-width: 0.5px;
+    height: auto;
+    left: 30px;
+    min-height: 136px;
+    position: relative;
+    top: 56px;
+    width: 398px;
+}
+.workArea {
+	width: 100%;
+	margin:0px;
+	display: table;
+	padding: 0px;
+}
+.step {
+    display: table;
+    float: left;
+    margin: 0;
+    position: relative;
+    top: 27px;
+    width: 100%;
+}
+.stepTitle {
+	width: 100%;
+	margin: 0 0 10px 0;
+	padding:0px;
+	float: left;
+}
