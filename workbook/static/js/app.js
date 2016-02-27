@@ -1,7 +1,10 @@
 
-var app = angular.module("workbook", [])
-app.controller("variables", function ($scope){
-	$scope.correct = 5000
+var app = angular.module("workbook", ["ngRoute"])
+app.controller("solveController", function ($scope, $routeParams, data){
+
+	question_id = $routeParams.question_id
+	$scope.question = data.questions[question_id].text
+	$scope.correct = data.questions[question_id].answer
 	$scope.vars = {};
 	$scope.counter = 1
 	$scope.add = function(isFormulaVariable){
@@ -15,8 +18,6 @@ app.controller("variables", function ($scope){
 			alert("Try Again")
 		}
 	}
-
-	$scope.question = "Calculate the force needed to speed up a car with a rate of 5ms-2(x), if the mass of the car is 1000000 g(y)."
 
 	$scope.formulas = [
 		{
@@ -35,10 +36,10 @@ app.controller("variables", function ($scope){
 	$scope.solution = []
 	$scope.add_formula = function(formula){
 		formula = formula ? formula : $scope.selected_formula
-		// recalculate($scope.selected_formula)
 		obj = jQuery.extend(true, {}, formula)
 		obj.variable = $scope.add(true)
 		$scope.solution.push(obj)
+		recalculate($scope.solution[$scope.solution.length-1])
 	}
 	$scope.evaluate = function(index, map_key, new_key){
 		$scope.solution[index].map[map_key] = new_key
@@ -55,3 +56,38 @@ app.controller("variables", function ($scope){
 		}
 	}
 })
+
+app.controller("homeController", function ($scope, data){
+	$scope.questions = data.questions
+})
+
+app.config(['$routeProvider', function($routeProvider) {
+   $routeProvider.
+   
+   when('/', {
+      templateUrl: 'views/dashboard.html', controller: 'homeController'
+   }).
+   
+   when('/solve/:question_id', {
+      templateUrl: 'views/solve.html', controller: 'solveController'
+   }).
+   
+   otherwise({
+      redirectTo: '/'
+   });
+	
+}]);
+
+app.factory('data', function(){
+	
+	return {
+		questions : [{
+			text: "Calculate the force needed to speed up a car with a rate of 5ms-2(x), if the mass of the car is 1000000 g(y).",
+			answer: 5000
+		}, {
+			text: "Calculate the force needed to speed up a car with a rate of 10ms-2(x), if the mass of the car is 1000000 g(y).",
+			answer: 10000
+		}]
+	};
+
+});
