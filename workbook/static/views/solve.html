@@ -18,12 +18,13 @@
        <div class="contents workArea">
                <div class="col-md-6 wa">
                <div class="step" ng-repeat="formula in solution track by $index">
-                       <div class="col-xs-12 stepTitle">Step {{$index+1}}. Output stored in <b>var{{formula.variable}}</b> <span ng-show="formula.result"> = {{formula.result}}</span> </div>
+                       <div class="col-xs-12 stepTitle">Step {{$index+1}}. Output stored in <b>{{formula.variable}}</b> <span ng-show="formula.result"> = {{formula.result}}</span> </div>
                        <div class="col-xs-12 stepareabox">
-							{{formula.string}}<br/>
+							<h3>{{formula.string}}</h3>
+							Where
 							<ul>
 							<li ng-repeat="(k,v) in formula.map">
-								{{k}} = <select ng-model="new_key" ng-change="evaluate($parent.$index, k, new_key)" ng-options="key as 'var'+key for (key, value) in vars">
+								{{k | remove_underscore}} = <select ng-model="new_key" ng-change="evaluate($parent.$index, k, new_key)" ng-options="key as key for (key, value) in vars">
 							</select>
 							</li>
                        </div>
@@ -36,10 +37,8 @@
                </div>
                <div class="col-md-6 wa variables">
                    <h3>Variables</h3>
-                   <div class="col-md-8"> <input name="variable" placeholder="Enter a value to store in var{{counter}}" class="form-control" ng-model="new_value"></div>
-                   <div class="col-md-4"> <button type="button" class="btn btn-primary variable_button" ng-click="add()">Add var{{counter}}</button></div>
                    <div ng-repeat="(key, value) in vars">
-                   	<b>var{{key}}</b> = {{value}}<br />
+                   	<b>{{key}}</b> = {{value}}<br />
                    </div>
                    <li ng-hide="vars | not_empty">No variables to display yet.</li>
                </div>
@@ -48,7 +47,7 @@
        <div class="answer">
            <span>Answer</span>
            <select ng-change="submit()" ng-model="answer" 
-			ng-options="'var'+k for (k,v) in vars">
+			ng-options="k for (k,v) in vars">
 			</select>
        </div>
     </div>

@@ -9,10 +9,21 @@ app.controller("solveController", function ($scope, $routeParams, data){
 	$scope.correct = question.answer
 	$scope.vars = {};
 	$scope.counter = 1
-	$scope.add = function(isFormulaVariable){
-		$scope.vars[$scope.counter] = isFormulaVariable == true ? 0 : $scope.new_value
-		$scope.new_value = ""
-		return $scope.counter++;
+
+	populate_input_variables()
+
+	function populate_input_variables(){
+		for(i=0; i<question.inputs.length; i++){
+			input = question.inputs[i]
+			$scope.vars[input.name + " in " + input.unit] = input.value
+		}
+	}
+
+	$scope.add = function(){
+		name = "result_of_formula_" + $scope.counter
+		$scope.vars[name] = ""
+		$scope.counter++;
+		return name
 	}
 	$scope.submit = function(){
 		if($scope.answer == $scope.correct){
@@ -40,7 +51,7 @@ app.controller("solveController", function ($scope, $routeParams, data){
 	$scope.add_formula = function(formula){
 		formula = formula ? formula : $scope.selected_formula
 		obj = jQuery.extend(true, {}, formula)
-		obj.variable = $scope.add(true)
+		obj.variable = $scope.add()
 		$scope.solution.push(obj)
 		recalculate($scope.solution[$scope.solution.length-1])
 	}
@@ -51,10 +62,10 @@ app.controller("solveController", function ($scope, $routeParams, data){
 	function recalculate(formula){
 		equation = formula.expression
 		for(symbol in formula.map){
-			equation = equation.replace(symbol, "$scope.vars["+formula.map[symbol]+"]")
+			equation = equation.replace(symbol, "$scope.vars['"+formula.map[symbol]+"']")
 		}
 		formula.result = eval(equation)
-		if (formula.variable >=0){
+		if (formula.variable != -1){
 			$scope.vars[formula.variable] = formula.result
 		}
 	}
@@ -85,10 +96,14 @@ app.factory('data', function(){
 	
 	questions = [{
 		text: "Calculate the force needed to speed up a car with a rate of 5ms-2, if the mass of the car is 1000000 g.",
-		answer: 5000
+		answer: 5000,
+		inputs: [{name: "acceleration of car", value: 5,unit: "ms-2"},
+			{name: "mass of car", value: 1000000, unit: "gms"}]
 	}, {
 		text: "Calculate the force needed to speed up a car with a rate of 10ms-2, if the mass of the car is 1000000 g.",
-		answer: 10000
+		answer: 10000,
+		inputs: [{name: "acceleration of car", value: 10,unit: "ms-2"},
+			{name: "mass of car", value: 1000000, unit: "gms"}]
 	}]
 
 	return {
@@ -107,5 +122,11 @@ app.factory('data', function(){
 app.filter('not_empty', function() {
   return function(obj) {
     return obj && Object.keys(obj).length > 0
+  };
+});
+
+app.filter('remove_underscore', function() {
+  return function(str) {
+    return str = str.replace(/_|-/g, " ");
   };
 });
