@@ -2,9 +2,9 @@
 <div class="contents">
     <div class="col-md-3 left-div">
         <h3>Formula</h3>
-		<div class="helptext">What would you do next?</div>
+		<div class="helptext">Click to add formula</div>
         <div class="glyphicon glyphicon-chevron-up"></div>
-        <div class="formula" ng-repeat="formula in formulas" ng-click="add_formula(formula)"><span>{{formula.string}}</span></div>
+        <div class="btn btn-default formula" ng-repeat="formula in formulas" ng-click="add_formula(formula)"><span>{{formula.string}}</span></div>
         <div class="glyphicon glyphicon-chevron-down"></div>
     </div>
     <div class="col-md-9 right-div">
@@ -15,7 +15,7 @@
            </div>
        </div>
        <div class="work-area">
-           <span> Work Area </span>
+           <span> Work Area </span> <a href="/#/solve/{{question_id}}">&nbsp&nbsp&nbsp&nbsp&nbsp&nbspreload</a>
        <div class="contents workArea">
                <div class="col-md-6 wa">
                <div class="step" ng-repeat="formula in solution track by $index">
@@ -30,6 +30,11 @@
 							</li>
                        </div>
                    </div>
+
+				    <div class="step" ng-if="last_derived_answer == 'empty'">
+		               No steps yet. Start by adding a formula from your left. <br /><br />
+		               Remember your final answer is the answer returned by the formula used last.
+				    </div>
 
                </div>
                <div class="col-md-6 wa variables">
@@ -52,9 +57,10 @@
 		    </div>
 		    <div class="step" ng-if="last_derived_answer == correct">
 		        <h1 style="color:darkgreen">Good Job</h1>
+		        <a href="/#/solve/{{next_question_id}}">Next Question</a>
 		    </div>
 		    <div class="step" ng-if="last_derived_answer == 'empty'">
-               No steps yet. Start by adding a formula from your left <br /><br />
+               Welcome to Student Workbook<br /><br />
 		    </div>
 		    <div class="step" ng-if="last_derived_answer!= correct && last_derived_answer!= 'empty' && last_derived_answer!= 'new'">
 		        <h2>Wrong Answer. Add a new formula or try again</h2>

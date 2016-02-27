@@ -8,7 +8,7 @@
  left: 60px;
  top: 35px;
  width: 298px;
- height: 790px;
+ height: 620px;
  z-index: 34;
 }
 
@@ -21,7 +21,7 @@
  left: 360px;
  top: 36px;
  width: 868px;
- height: 790px;
+ height: 620px;
  z-index: 33;
 }
 .col-md-3.left-div h3{
@@ -45,8 +45,8 @@
  -webkit-transform: matrix( 1.25425342017503,0,0,1.25425342017503,0,0);
  -ms-transform: matrix( 1.25425342017503,0,0,1.25425342017503,0,0);
  position: relative;
- left: 45px;
- top: 60px;
+ left: 75px;
+ top: 75px;
  }
  
  span.qna {
@@ -96,7 +96,7 @@
 }
 .work-area {
     background-color: rgb(244, 247, 250);
-    height: 500px;
+    height: 320px;
     left: 0;
     position: relative;
     top: 19px;
@@ -129,9 +129,8 @@
     position: relative;
 }
 .formula > span {
-    left: 65px;
     position: relative;
-    top: 24px;
+    top: 20px;
 }
 
 .variable_button {
@@ -193,7 +192,7 @@ background-color: rgb(244, 247, 250);
 }
 
 .col-md-6.wa{
-    height: 450px;
+    height: 270px;
     overflow-y: scroll;
     overflow-x: hidden;
 }

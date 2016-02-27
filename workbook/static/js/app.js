@@ -11,6 +11,9 @@ app.controller("solveController", function ($scope, $routeParams, data){
 	$scope.counter = 1
 	$scope.last_derived_answer = 'empty'
 
+	$scope.next_question_id = data.Question.next(question_id)
+	$scope.question_id = question_id
+
 	populate_input_variables()
 
 	function populate_input_variables(){
@@ -152,6 +155,10 @@ app.factory('data', function(){
 			},
 			list : function(){
 				return questions
+			},
+			next: function(id){
+				id = parseInt(id)
+				return id >= questions.length-1 ? 0 : id+1
 			}
 		}
 	};
