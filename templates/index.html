@@ -1,0 +1,66 @@
+<html>
+
+<head>
+	<script src="bower_components/jquery/dist/jquery.js"></script>
+	<script src="bower_components/angular/angular.js"></script>
+	<script src="js/app.js"></script>
+</head>
+
+<body ng-app="workbook" ng-controller="variables">
+<div style="width:300px">
+	<b><i>Question:</i></b>
+	<br />
+	Calculate the force needed to speed up a car with a rate of 5ms-2(x), if the mass of the car is 1000000 g(y).<hr/>
+	<br />
+
+	<div style="border-style: inset;">
+		Variables:
+		<div ng-repeat="(key, value) in vars">
+			<b>var{{key}}</b> = {{value}}</div><br />
+		var{{counter}} : <input type=text ng-model="new_value" placeholder="value"/><button ng-click="add()">add</button>
+	</div>
+	<br /><br />
+
+	<div style="border-style: groove;">
+		Formula:<br />
+		<ol>
+			<li ng-repeat="formula in formulas">{{formula.string}}</li>
+		</ol>
+	</div>
+	<br/>
+
+	<div style="border-style: outset;">
+		Solution Space:<br />
+		<select ng-model="selected_formula" 
+		ng-options="formula as formula.string for formula in formulas">
+		</select><button ng-click="add_formula()">Add Formula</button>
+		<br /><br />
+		<ol>
+			<li ng-repeat="formula in solution track by $index">
+				{{formula.string}}<br/>
+				<ul>
+				<li ng-repeat="(k,v) in formula.map">
+					{{k}} = <select ng-model="new_key" ng-change="evaluate($parent.$index, k, new_key)" ng-options="key as key for (key, value) in vars">
+		</select>
+				</li>
+				: {{formula.result}}
+			</li>
+		</ol>
+	</div>
+	<br />
+
+	<hr/>
+	<b><i>Answer:</i></b>
+	<select ng-change="submit()" ng-model="answer" 
+	ng-options="'var'+k for (k,v) in vars">
+	</select>
+</div>
+<br /><br /><br />
+
+<!-- <div>
+	new key: {{ new_key | json }}<br/>
+	{{selected_formula | json}}
+</div> -->
+
+</body>
+</html>
