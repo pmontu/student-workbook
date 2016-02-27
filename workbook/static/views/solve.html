@@ -18,7 +18,7 @@
        <div class="contents workArea">
                <div class="col-md-6 wa">
                <div class="step" ng-repeat="formula in solution track by $index">
-                       <div class="col-xs-12 stepTitle">Step {{$index+1}}</div>
+                       <div class="col-xs-12 stepTitle">Step {{$index+1}}. Output stored in <b>var{{formula.variable}}</b> <span ng-show="formula.result"> = {{formula.result}}</span> </div>
                        <div class="col-xs-12 stepareabox">
 							{{formula.string}}<br/>
 							<ul>
@@ -26,17 +26,22 @@
 								{{k}} = <select ng-model="new_key" ng-change="evaluate($parent.$index, k, new_key)" ng-options="key as 'var'+key for (key, value) in vars">
 							</select>
 							</li>
-							 var{{formula.variable}} = {{formula.result}}
                        </div>
+                   </div>
+
+                   <div class="step" ng-show="solution.length==0">
+                   No steps yet. Start by adding a formula from your left <br /><br />
+                   <b><i>Tip:</i></b> Remember to store the input in handy variables
                    </div>
                </div>
                <div class="col-md-6 wa variables">
                    <h3>Variables</h3>
-                   <div class="col-md-8"> <input name="variable" placeholder="Variable Name" class="form-control" ng-model="new_value"></div>
-                   <div class="col-md-4"> <button type="button" class="btn btn-primary variable_button" ng-click="add()">Add</button></div>
+                   <div class="col-md-8"> <input name="variable" placeholder="Enter a value to store in var{{counter}}" class="form-control" ng-model="new_value"></div>
+                   <div class="col-md-4"> <button type="button" class="btn btn-primary variable_button" ng-click="add()">Add var{{counter}}</button></div>
                    <div ng-repeat="(key, value) in vars">
                    	<b>var{{key}}</b> = {{value}}<br />
                    </div>
+                   <li ng-hide="vars | not_empty">No variables to display yet.</li>
                </div>
            </div>
        </div>

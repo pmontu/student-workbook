@@ -11,6 +11,7 @@ app.controller("solveController", function ($scope, $routeParams, data){
 	$scope.counter = 1
 	$scope.add = function(isFormulaVariable){
 		$scope.vars[$scope.counter] = isFormulaVariable == true ? 0 : $scope.new_value
+		$scope.new_value = ""
 		return $scope.counter++;
 	}
 	$scope.submit = function(){
@@ -101,4 +102,10 @@ app.factory('data', function(){
 		}
 	};
 
+});
+
+app.filter('not_empty', function() {
+  return function(obj) {
+    return obj && Object.keys(obj).length > 0
+  };
 });
