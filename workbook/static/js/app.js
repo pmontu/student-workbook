@@ -74,6 +74,14 @@ app.controller("solveController", function ($scope, $routeParams, data){
 			}
 		}
 	}
+	$scope.non_null_vars = function(){
+		res = {}
+		for(key in $scope.vars){
+			if($scope.vars[key])
+				res[key] = $scope.vars[key]
+		}
+		return res
+	}
 })
 
 app.controller("homeController", function ($scope, data){

@@ -2,6 +2,7 @@
 <div class="contents">
     <div class="col-md-3 left-div">
         <h3>Formula</h3>
+
         <div class="glyphicon glyphicon-chevron-up"></div>
         <div class="formula" ng-repeat="formula in formulas" ng-click="add_formula(formula)"><span>{{formula.string}}</span></div>
         <div class="glyphicon glyphicon-chevron-down"></div>
@@ -24,7 +25,7 @@
 							Where
 							<ul>
 							<li ng-repeat="(k,v) in formula.map">
-								{{k | remove_underscore}} = <select ng-model="new_key" ng-change="evaluate($parent.$index, k, new_key)" ng-options="key as key for (key, value) in vars">
+								{{k | remove_underscore}} = <select ng-model="new_key" ng-change="evaluate($parent.$index, k, new_key)" ng-options="key as key+'('+value+')' for (key, value) in non_null_vars()">
 							</select>
 							</li>
                        </div>
@@ -45,7 +46,7 @@
            <select ng-change="submit()" ng-model="answer" 
 			ng-options="k for (k,v) in vars">
 			</select> -->
-			
+
 		    <div class="step" ng-if="last_derived_answer == 'new'">
 		        <h3>Choose the variables</h3>
 		    </div>
@@ -54,7 +55,6 @@
 		    </div>
 		    <div class="step" ng-if="last_derived_answer == 'empty'">
                No steps yet. Start by adding a formula from your left <br /><br />
-               <b><i>Tip:</i></b> Remember to store the input in handy variables
 		    </div>
 		    <div class="step" ng-if="last_derived_answer!= correct && last_derived_answer!= 'empty' && last_derived_answer!= 'new'">
 		        <h2>Wrong Answer. Add a new formula or try again</h2>
