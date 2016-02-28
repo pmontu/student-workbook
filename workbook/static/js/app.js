@@ -104,6 +104,7 @@ app.controller("solveController", function ($scope, $routeParams, data){
 		}
 		return res
 	}
+	$scope.isNaN = isNaN
 })
 
 app.controller("homeController", function ($scope, data){
