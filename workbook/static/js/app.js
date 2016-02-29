@@ -1,6 +1,6 @@
 
 var app = angular.module("workbook", ["ngRoute"])
-app.controller("solveController", function ($scope, $routeParams, data, $route){
+app.controller("solveController", function ($scope, $routeParams, data, $route, $location){
 
 	question_id = $routeParams.question_id
     question = data.Question.get(question_id)
@@ -131,6 +131,9 @@ app.controller("solveController", function ($scope, $routeParams, data, $route){
 	$scope.isNaN = isNaN
 	$scope.reloadRoute = function() {
 	   $route.reload();
+	}
+	$scope.nextQuestion = function(){
+		$location.path('solve/'+$scope.next_question_id)
 	}
 })
 
