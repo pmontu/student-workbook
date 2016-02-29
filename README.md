@@ -16,9 +16,11 @@ An amalgamation of programming and school problem solving. A programmatic proble
 * Topic: User Acquisition, Engagement & Retention
 * Criteria: Novelty & Scalablity
 
-## Other Features
+## Features Coming Up
 
+1. Animated Question and Variables
+2. Timer, Points and More Questions
 1. Recommendations
 2. Lessons and Assesment
-3. Points, Leaderboard and view other user solutionss
-4. Challenges with Live Telecasting
+3. View other user solutions and Leaderboard
+4. Challenges and Live Telecasting

@@ -39,30 +39,30 @@ app.controller("solveController", function ($scope, $routeParams, data){
 
 	$scope.formulas = [
 		{
-			string: "k=g/1000",
-			expression: "k=_g_/1000",
-			map:{"_g_":-1},
+			string: "kilo-grams = grams / 1000",
+			expression: "k=_grams_/1000",
+			map:{"_grams_":-1},
 			result:0,
 			variable:-1,
 			unit:"kilo grams"
 		}, {
-			string: "f = m*a",
-			expression: "f = _m_*_a_",
-			map:{"_m_":-1, "_a_":-1},
+			string: "force = mass * acceleration",
+			expression: "f = _mass_*_acceleration_",
+			map:{"_mass_":-1, "_acceleration_":-1},
 			result:0,
 			variable:-1,
 			unit:"Newton"
 		}, {
-			string: "s = v*t",
-			expression: "s = _v_*_t_",
-			map:{"_v_":-1, "_t_":-1},
+			string: "distance = speed * time",
+			expression: "s = _speed_*_time_",
+			map:{"_speed_":-1, "_time_":-1},
 			result:0,
 			variable:-1,
 			unit:"meter"
 		}, {
-			string: "s = u*t+0.5*a*t*t",
-			expression: "s = _u_*_t_+0.5*_a_*_t_*_t_",
-			map:{"_u_":-1, "_a_":-1, "_t_":-1},
+			string: "s = u * t + (a * t^2) / 2",
+			expression: "s = _initial-velocity_*_time_+0.5*_acceleration_*_time_*_time_",
+			map:{"_initial-velocity_":-1, "_acceleration_":-1, "_time_":-1},
 			result:0,
 			variable:-1,
 			unit:"meter"
