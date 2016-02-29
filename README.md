@@ -20,7 +20,8 @@ An amalgamation of programming and school problem solving. A programmatic proble
 
 1. Animated Question and Variables
 2. Timer, Points and More Questions
-1. Recommendations
-2. Lessons and Assesment
-3. View other user solutions and Leaderboard
-4. Challenges and Live Telecasting
+3. Recommendations
+4. Lessons and Assesment
+5. View other user solutions and Leaderboard
+6. Challenges and Live Telecasting
+7. Response interface

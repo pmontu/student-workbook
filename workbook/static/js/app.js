@@ -37,6 +37,7 @@ app.controller("solveController", function ($scope, $routeParams, data){
 		}
 	}
 
+	tetha = String.fromCharCode(920)
 	$scope.formulas = [
 		{
 			string: "kilo-grams = grams / 1000",
@@ -66,6 +67,13 @@ app.controller("solveController", function ($scope, $routeParams, data){
 			result:0,
 			variable:-1,
 			unit:"meter"
+		}, {
+			string: "sine ("+String.fromCharCode(920)+")",
+			expression: "Math.sin(_tetha_ * Math.PI / 180.0)",
+			map:{"_tetha_":-1},
+			result:0,
+			variable:-1,
+			unit:""
 		}]
 	$scope.solution = []
 	$scope.add_formula = function(formula){
