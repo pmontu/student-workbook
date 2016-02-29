@@ -94,9 +94,9 @@ app.controller("solveController", function ($scope, $routeParams, data){
 			// equation = equation.replace(symbol, "$scope.vars['"+formula.map[symbol]+"']")
 			equation = equation.replace(new RegExp(symbol, 'g'), "$scope.vars['"+formula.map[symbol]+"']");
 		}
-		formula.result = eval(equation)
+		formula.result = eval(equation).toFixed(2)
 		if (formula.variable != -1){
-			result = parseFloat(formula.result).toFixed(2)
+			result = parseFloat(formula.result)
 			$scope.vars[formula.variable] = result
 			if(result){
 				$scope.last_derived_answer = result
