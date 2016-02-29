@@ -74,7 +74,23 @@ app.controller("solveController", function ($scope, $routeParams, data){
 			result:0,
 			variable:-1,
 			unit:""
+		}, {
+			string: "acceleration = velocity/time",
+			expression: "a = _velocity_/_time_",
+			map:{"_velocity_":-1, "_time_":-1},
+			result:0,
+			variable:-1,
+			unit:"m/s2"
+		}, {
+			string: "del x = x2 - x1",
+			expression: "dx = _x2_ - _x1_",
+			map:{"_x2_":-1, "_x1_":-1},
+			result:0,
+			variable:-1,
+			unit:""
 		}]
+
+		"acceleration = v/t"
 	$scope.solution = []
 	$scope.add_formula = function(formula){
 		formula = formula ? formula : $scope.selected_formula
@@ -154,8 +170,13 @@ app.factory('data', function(){
 		inputs: [{name: "acceleration", value: 3.20,unit: "m/s2"},
 			{name: "time on ground", value: 32.8, unit: "seconds"},
 			{name: "initial velocity", value: 0, unit: "m/s"}]
+	}, {
+		text: "Rocket-powered sleds are used to test the human response to acceleration. If a rocket-powered sled is accelerated to a speed of 444 m/s in 1.83 seconds, then what is the distance that the sled travels?",
+		answer: 406.26,
+		inputs: [{name: "final velocity", value: 444,unit: "m/s"},
+			{name: "inital velocity", value: 0, unit: "m/s"},
+			{name: "time", value: 1.83, unit: "s"}]
 	}]
-
 
 	return {
 		Question: {

@@ -10,6 +10,8 @@
  width: 298px;
  height: 620px;
  z-index: 34;
+overflow-x: hidden;
+overflow-y: scroll;
 }
 
  .col-md-9.right-div {
