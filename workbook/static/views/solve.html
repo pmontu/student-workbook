@@ -51,6 +51,7 @@
            <select ng-change="submit()" ng-model="answer" 
 			ng-options="k for (k,v) in vars">
 			</select> -->
+      <!-- <a ng-click="nextQuestion()" data-translate style="cursor:pointer;">Next Question</a> -->
 		    <div class="step" ng-if="last_derived_answer == 'new' || (last_derived_answer!='empty' && isNaN(last_derived_answer))">
 		        <h3>Choose the variables. Do not leave out any</h3>
 		    </div>

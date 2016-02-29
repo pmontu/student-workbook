@@ -1,4 +1,4 @@
-
+// ngAnimate
 var app = angular.module("workbook", ["ngRoute"])
 app.controller("solveController", function ($scope, $routeParams, data, $route, $location){
 
